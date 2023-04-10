@@ -40,20 +40,23 @@ z_f = zeros(num_pts,1);
 
 % filter observations
 for k = 1:num_pts
+    %input vectors    
     if k == 1
+        %initial velocities are 0
         dx_k = 0;
         dy_k = 0;
         dz_k = 0;
     else
         dx_k = dx(k-1);
         dy_k = dy(k-1);
-        dz_k = dz(k-1);
+        dz_k = dz(k-1);        
     end
-    %input vectors
-    k_x = [x(k); y(k); z(k); dx_k; dy_k; dz_k];
+    % observation vector
     k_z = [x(k); y(k); z(k)];
+    k_x = [k_z; dx_k; dy_k; dz_k];
     % call the filter
-    [ k_x, k_P ] = Kalman( k_z, k_x, k_P, k_R, k_H, dt);
+    [ k_x, k_P ] = KalmanPredict( k_x, k_P, dt);
+    [ k_x, k_P ] = KalmanUpdate( k_z, k_x, k_P, k_R, k_H);
     % save predicted positions
     x_f(k) = k_x(1);
     y_f(k) = k_x(2);
