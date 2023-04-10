@@ -1,3 +1,5 @@
+% @fileName testKalman.m
+% @author Melih Altun @2023
 
 num_pts = 100;  % numver of points
 r = 1;  % Radius of the spiral

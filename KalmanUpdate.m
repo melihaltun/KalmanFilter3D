@@ -1,3 +1,6 @@
+% @fileName KalmanUpdate.m
+% @author Melih Altun @2023
+
 function [ k_x, k_P ] = KalmanUpdate( k_z, k_x_in, k_P, k_R, k_H)
     
     k_x = k_x_in;

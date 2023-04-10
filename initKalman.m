@@ -1,3 +1,6 @@
+% @fileName InitKalman.m
+% @author Melih Altun @2023
+
 function [HMatrix, RMatrix, PMatrix] = initKalman()
 
 
