@@ -6,7 +6,7 @@ function [ k_x, k_P ] = KalmanPredict( k_x_in, k_P, dt)
     k_x = k_x_in;
     
     
-    if nargin < 6
+    if nargin < 3
         dt = 1; %difference of current frame and last frame
     end
 
