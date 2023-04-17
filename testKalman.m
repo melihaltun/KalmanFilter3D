@@ -1,7 +1,7 @@
 % @fileName testKalman.m
 % @author Melih Altun @2023
 
-num_pts = 1000;  % numver of points
+num_pts = 1000;  % number of points
 r = 1;  % Radius of the spiral
 p = 0.1;  % Pitch of the spiral
 t = (linspace(0, 10*pi, num_pts))';  % Time vector
@@ -13,15 +13,12 @@ y = r*sin(f*t);
 z = p*t;
 
 % add noise to observations
-x = x + 0.03*randn(num_pts,1);
-y = y + 0.03*randn(num_pts,1);
-z = z + 0.03*randn(num_pts,1);
+x = x + 0.04*randn(num_pts,1);
+y = y + 0.04*randn(num_pts,1);
+z = z + 0.04*randn(num_pts,1);
 
-% time and positions differences
+% time difference between observations
 dt = 0.1;
-dx = diff(x);
-dy = diff(y);
-dz = diff(z);
 
 % allocate filtered results
 x_f = zeros(num_pts,1);
@@ -31,9 +28,8 @@ z_f = zeros(num_pts,1);
 % initialize kalman
 [k_H, k_R, k_P] = KalmanInit();
 
-% filter observations
+% for each observation
 for k = 1:num_pts
-    %input vectors   
     % observation vector
     k_z = [x(k); y(k); z(k)];
     if k == 1
@@ -42,11 +38,6 @@ for k = 1:num_pts
         dy_k = 0;
         dz_k = 0;
         k_x = [k_z; dx_k; dy_k; dz_k];
-    else
-        dx_k = dx(k-1);
-        dy_k = dy(k-1);
-        dz_k = dz(k-1);  
-        k_x(4:end) = [dx_k; dy_k; dz_k];
     end
     
     % call the filter
