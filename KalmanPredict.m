@@ -18,7 +18,7 @@ function [x, P] = KalmanPredict(x_inp, P, dt)
             0.0   0.0   0.0   0.0   0.0   1.0 ] ;
 
     f_Acceleration = 0.01 ;          % might need to be calculated
-    f_sigmaAcceleration = 0.2 ;     % might need to be calculated
+    f_sigmaAcceleration = 0.75 ;     % might need to be calculated
     
     % Process noise
     w = [ dt*dt/2*randn; dt*dt/2*randn ; dt*dt/2*randn ; 0 ; 0 ; 0 ] ;    

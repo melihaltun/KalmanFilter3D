@@ -13,9 +13,9 @@ y = r*sin(f*t);
 z = p*t;
 
 % add noise to observations
-x = x + 0.04*randn(num_pts,1);
-y = y + 0.04*randn(num_pts,1);
-z = z + 0.04*randn(num_pts,1);
+x_n = x + 0.04*randn(num_pts,1);
+y_n = y + 0.04*randn(num_pts,1);
+z_n = z + 0.04*randn(num_pts,1);
 
 % time difference between observations
 dt = 0.1;
@@ -51,7 +51,7 @@ end
 
 % Plot the spiral trajectory
 figure(1)
-plot3(x, y, z,'r', 'LineWidth', 1.5)
+plot3(x_n, y_n, z_n,'r', 'LineWidth', 1.5)
 hold on;
 plot3(x_f, y_f, z_f,'g','LineWidth', 2)
 hold off
@@ -61,3 +61,10 @@ zlabel('Z')
 title('Trajectory')
 legend('Noisy Observations','Filtered Coordionates')
 grid on
+
+err_observations = sqrt((x_n - x).^2 + (y_n - y).^2 + (z_n - z).^2);
+err_filtered = sqrt((x_f - x).^2 + (y_f - y).^2 + (z_f - z).^2);
+fprintf('MSE Noisy Observations = %f\n', sum(err_observations.^2)/length(err_observations));
+fprintf('MSE Filtered Observations = %f\n', sum(err_filtered.^2)/length(err_observations));
+
+
