@@ -31,7 +31,7 @@ z_f = zeros(num_pts,1);
 % for each observation
 for k = 1:num_pts
     % observation vector
-    k_z = [x(k); y(k); z(k)];
+    k_z = [x_n(k); y_n(k); z_n(k)];
     if k == 1
         %initial velocities are 0, initial prediction is the observed state
         dx_k = 0;
